@@ -17,8 +17,16 @@ enum BtnTitleTxt:Int {
 }
 
 class ViewController: UIViewController {
+    //MARK:IBOutlet
+    @IBOutlet weak var resultTxt: UILabel!
     
+    //MARK:Attribute
     let btnItemGroup = BtnItemGroup(frame:CGRectZero)
+    var currentBtnFunction:BtnTitleTxt?
+    var firstNum:Double = 0
+    var nowBtn:BtnTitleTxt?
+    var boolPreMark:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,13 +47,8 @@ class ViewController: UIViewController {
     }
     
     
-    @IBOutlet weak var resultTxt: UILabel!
-    
-    var currentBtnFunction:BtnTitleTxt?
-    var firstNum:Double = 0
-    var nowBtn:BtnTitleTxt?
-    var boolPreMark:Bool = false
-    
+    //MARK:Method
+    //TODO:Do when btnClick
     @IBAction func calBtnItemClick(btnItemGroup: BtnItemGroup) {
         let currentClickBtn = btnItemGroup.currentClickBtn!
         nowBtn = BtnTitleTxt(rawValue: currentClickBtn.tag)

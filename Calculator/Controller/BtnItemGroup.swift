@@ -17,19 +17,18 @@ class BtnItemGroup: UIControl {
     // Drawing code
     }
     */
+    //
+    private var btnWidth:CGFloat = 40
+    private var btnHeight:CGFloat = 40
+    private var itemWidth:CGFloat = 50
+    private var itemHeight:CGFloat = 50
+    
+    
     var horizontalNum:Int = 4
     var verticalNum:Int = 4
-    var btnWidth:CGFloat = 40
-    var btnHeight:CGFloat = 40
-    var itemWidth:CGFloat = 50
-    var itemHeight:CGFloat = 50
-    
-    var margin = 2
-    
+    var margin:Int = 2
     var arrayTxtShow = Array<Array<String>>()
-    
     var arrayTag = Array<Array<Int>>()
-    
     var currentClickBtn:UIButton?
     
     
@@ -47,13 +46,16 @@ class BtnItemGroup: UIControl {
         btnWidth = itemWidth - CGFloat(2*margin)
         btnHeight = itemHeight - CGFloat(2*margin)
         for indexHori in 0...horizontalNum - 1{
+            let x = CGFloat(indexHori) * itemWidth + CGFloat(margin)
             for indexVert in 0...verticalNum - 1{
-                let x = CGFloat(indexHori) * itemWidth + CGFloat(margin)
                 let y = CGFloat(indexVert) * itemHeight + CGFloat(margin)
                 let rect = CGRect(x: x, y: y, width: btnWidth, height: btnHeight)
                 let btnItem = UIButton(frame: rect)
-                btnItem.backgroundColor = UIColor.blueColor()
+                btnItem.backgroundColor = UIColor.whiteColor()
                 btnItem.setTitle(arrayTxtShow[indexVert][indexHori], forState: UIControlState.Normal)
+                btnItem.titleLabel!.font = UIFont.systemFontOfSize(CGFloat(btnHeight/2))
+                btnItem.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                btnItem.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
                 btnItem.tag = arrayTag[indexVert][indexHori]
                 btnItem.addTarget(self, action: "btnItemClick:", forControlEvents:UIControlEvents.TouchUpInside)
                 self.addSubview(btnItem)

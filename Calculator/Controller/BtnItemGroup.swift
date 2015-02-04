@@ -30,6 +30,7 @@ class BtnItemGroup: UIControl {
     var arrayTxtShow = Array<Array<String>>()
     var arrayTag = Array<Array<Int>>()
     var currentClickBtn:UIButton?
+    var arrayUIButton = Dictionary<Int,UIButton>()
     
     
     override init(frame: CGRect) {
@@ -49,7 +50,16 @@ class BtnItemGroup: UIControl {
             let x = CGFloat(indexHori) * itemWidth + CGFloat(margin)
             for indexVert in 0...verticalNum - 1{
                 let y = CGFloat(indexVert) * itemHeight + CGFloat(margin)
+                let index = indexVert * horizontalNum + indexHori
                 let rect = CGRect(x: x, y: y, width: btnWidth, height: btnHeight)
+                if(arrayUIButton[index] != nil)
+                {
+                   let btnItem = arrayUIButton[index]
+                    btnItem?.frame = rect
+                    continue
+                    
+                }
+                
                 let btnItem = UIButton(frame: rect)
                 btnItem.backgroundColor = UIColor.whiteColor()
                 btnItem.setTitle(arrayTxtShow[indexVert][indexHori], forState: UIControlState.Normal)
@@ -59,6 +69,7 @@ class BtnItemGroup: UIControl {
                 btnItem.tag = arrayTag[indexVert][indexHori]
                 btnItem.addTarget(self, action: "btnItemClick:", forControlEvents:UIControlEvents.TouchUpInside)
                 self.addSubview(btnItem)
+                arrayUIButton[index] = btnItem
             }
         }
     }

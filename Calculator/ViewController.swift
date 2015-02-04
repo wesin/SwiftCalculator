@@ -32,23 +32,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        btnItemGroup.backgroundColor = UIColor.redColor()
+        btnItemGroup.backgroundColor = UIColor.brownColor()
         btnItemGroup.horizontalNum = 4
         btnItemGroup.verticalNum = 4
         btnItemGroup.arrayTxtShow = [["7","8","9","-"],["4","5","6","+"],["1","2","3","*"],[".","0","=","/"]]
         btnItemGroup.arrayTag = [[7,8,9,11],[4,5,6,12],[1,2,3,13],[10,0,15,14]]
-            }
+    }
     
     override func viewDidLayoutSubviews() {
+        //计算btnitemgroup的大小
         let margin:CGFloat = 20.0
         let resultLableFrame = resultTxt.frame
         btnItemGroup.frame = CGRect(x: margin, y: resultTxt.frame.height + 40, width: view.bounds.width-2*margin, height: view.frame.height - resultTxt.frame.height - 80)
+        
         btnItemGroup.initBtnItems()
         btnItemGroup.addTarget(self, action: "calBtnItemClick:", forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(btnItemGroup)
 
     }
     
+    //所有旋转的支持
     override func supportedInterfaceOrientations() -> Int {
         return Int(UIInterfaceOrientationMask.All.rawValue)
     }

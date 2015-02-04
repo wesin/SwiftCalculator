@@ -42,8 +42,8 @@ class BtnItemGroup: UIControl {
     }
     
     func initBtnItems() -> Void{
-        itemWidth = frame.width / CGFloat(horizontalNum)
-        itemHeight = frame.height / CGFloat(verticalNum)
+        itemWidth = bounds.width / CGFloat(horizontalNum)
+        itemHeight = bounds.height / CGFloat(verticalNum)
         btnWidth = itemWidth - CGFloat(2*margin)
         btnHeight = itemHeight - CGFloat(2*margin)
         for indexHori in 0...horizontalNum - 1{
@@ -52,23 +52,23 @@ class BtnItemGroup: UIControl {
                 let y = CGFloat(indexVert) * itemHeight + CGFloat(margin)
                 let index = indexVert * horizontalNum + indexHori
                 let rect = CGRect(x: x, y: y, width: btnWidth, height: btnHeight)
-                if(arrayUIButton[index] != nil)
+                //如果不是第一次加载，下次旋转屏幕只需要重新设置rect即可
+                var btnItem = arrayUIButton[index]
+                if(btnItem != nil)
                 {
-                   let btnItem = arrayUIButton[index]
                     btnItem?.frame = rect
                     continue
-                    
                 }
                 
-                let btnItem = UIButton(frame: rect)
-                btnItem.backgroundColor = UIColor.whiteColor()
-                btnItem.setTitle(arrayTxtShow[indexVert][indexHori], forState: UIControlState.Normal)
-                btnItem.titleLabel!.font = UIFont.systemFontOfSize(CGFloat(btnHeight/2))
-                btnItem.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-                btnItem.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
-                btnItem.tag = arrayTag[indexVert][indexHori]
-                btnItem.addTarget(self, action: "btnItemClick:", forControlEvents:UIControlEvents.TouchUpInside)
-                self.addSubview(btnItem)
+                btnItem = UIButton(frame: rect)
+                btnItem!.backgroundColor = UIColor.whiteColor()
+                btnItem!.setTitle(arrayTxtShow[indexVert][indexHori], forState: UIControlState.Normal)
+                btnItem!.titleLabel!.font = UIFont.systemFontOfSize(CGFloat(btnHeight/2))
+                btnItem!.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+                btnItem!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+                btnItem!.tag = arrayTag[indexVert][indexHori]
+                btnItem!.addTarget(self, action: "btnItemClick:", forControlEvents:UIControlEvents.TouchUpInside)
+                self.addSubview(btnItem!)
                 arrayUIButton[index] = btnItem
             }
         }
